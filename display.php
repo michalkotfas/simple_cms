@@ -1,27 +1,54 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <title>SimpleCMS</title>
-</head>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 
-<body>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 
-<?php
+  <!--
+    *********************************************************************************
+    * 
+    * File: display.php   | For retrieving and displaying data from the DB.
+    * 
+    * 
+    * Created by Jason Lengstorf for Ennui Design. Copyright (C) 2008 Ennui Design.
+    * 
+    *        www.EnnuiDesign.com | answers@ennuidesign.com | (406) 270-4435
+    * 
+    * -----------------------------------------------------------------------------
+    * 
+    * This file was created to accompany an article written for CSS-Tricks.com
+    * 
+    *********************************************************************************
+  -->
 
-  include_once('_class/simpleCMS.php');
-  $obj = new simpleCMS();
-  $obj->host = 'database.host.net';
-  $obj->username = 'DB1234567';
-  $obj->password = 'DBpassword';
-  $obj->table = 'DB1234567';
-  $obj->connect();
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    
+    <title>Simple CMS with PHP</title>
+    
+    <link rel="stylesheet" type="text/css" href="style.css" />
+  </head>
 
-  if ( $_POST )
-    $obj->write($_POST);
+  <body>
+  	<div id="page-wrap">
+    <?php
+    
+      include_once('_class/simpleCMS.php');
+      $obj = new simpleCMS();
 
-  echo ( $_GET['admin'] == 1 ) ? $obj->display_admin() : $obj->display_public();
+	  /* CHANGE THESE SETTINGS FOR YOUR OWN DATABASE */
+      $obj->host = 'localhost';
+      $obj->username = 'username';
+      $obj->password = 'db_password';
+      $obj->table = 'database_name';
+      $obj->connect();
+    
+      if ( $_POST )
+        $obj->write($_POST);
+    
+      echo ( $_GET['admin'] == 1 ) ? $obj->display_admin() : $obj->display_public();
+    
+    ?>
+	</div>
+  </body>
 
-?>
-
-</body>
 </html>
